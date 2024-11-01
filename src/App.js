@@ -2,8 +2,9 @@
 import "./App.css"
 import {useState, useEffect} from "react";
 import axios from "axios";
+import Row from "./components/Row";
 
-const url = "http://localhost:3002/"
+const url = "http://localhost:3002"
 function App() {
 
   const [task, setTask] = useState("")
@@ -19,7 +20,7 @@ function App() {
   }, [])
 
   const addTask = () => {
-    axios.post(url + "create", {
+    axios.post(url + "/create", {
       description: task
     })
     .then(response => {
@@ -58,9 +59,7 @@ function App() {
         <ul>
           {
             tasks.map(item => (
-              <li key={item.id}>{item.description}
-                <button className="delete-button" onClick={() => deleteTask(item.id)}>Delete</button>
-              </li>
+              <Row key={item.id} item={item} deleteTask={deleteTask}/>
             ))
           }
 

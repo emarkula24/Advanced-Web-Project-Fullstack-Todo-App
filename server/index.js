@@ -3,6 +3,7 @@ import cors from "cors"
 import pkg from "pg"
 import dotenv from "dotenv"
 
+enviroment = process.env.NODE_ENV
 dotenv.config()
 
 const port = 3002
@@ -17,9 +18,9 @@ const openDb = () => {
     const pool = new Pool({
     user: process.env.POSTGRES_USER,
     host: process.env.POSTGRES_HOST,
-    database: process.env.POSTGRES_DB,
+    database: process.env.NODE_ENV === "development" ? process.env.DB_NAME : process.env.TEST_DB_NAME,
     password: process.env.POSTGRES_PASSWORD,
-    port: 5432
+    port: process.env.NODE_ENV === "development" ?  process.env.DB_PORT : process.env.TEST_DB_PORT
     })
     return pool
 }
