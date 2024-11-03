@@ -50,7 +50,22 @@ describe("POST task", () => {
             body: JSON.stringify({"description":null})
         })
         const data = await response.json()
-        expect(response.status).to.equal(500)
+        expect(response.status).to.equal(400, data.error)
+        expect(data).to.be.an("object")
+        expect(data).to.include.all.keys("error")
+    })
+
+    it ("should not post a task with zero length description", async () => {
+        const response = await fetch("http://localhost:3002/create", {
+            method: "post",
+            headers: {
+                "Content-Type":"application/json",
+                Authorization: token
+            },
+            body: JSON.stringify({"description" : ""})
+        })
+        const data = await response.json()
+        expect(response.status).to.equal(400, data.error)
         expect(data).to.be.an("object")
         expect(data).to.include.all.keys("error")
     })
