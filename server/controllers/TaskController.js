@@ -1,5 +1,5 @@
-import { selectAllTasks, insertTask } from "../models/Task"
-import { emptyOrRows } from "../helpers/utils"
+import { selectAllTasks, insertTask, removeTask } from "../models/Task.js"
+import { emptyOrRows } from "../helpers/utils.js"
 
 const getTasks = async (req, res, next) => {
     try {
@@ -24,4 +24,15 @@ const postTask = async (req, res, next) => {
     }
 }
 
-export { getTasks, postTask };
+const deleteTask = async (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id)
+        await removeTask(id)
+        return res.status(200).json({id: id})
+    } catch (error) {
+        next(error)
+    }
+
+}
+
+export { getTasks, postTask, deleteTask };
