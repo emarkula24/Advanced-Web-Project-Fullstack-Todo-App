@@ -3,12 +3,13 @@ import path from "path"
 import { pool } from "./db.js"
 import { fileURLToPath } from 'url'
 import { dirname } from 'path'
-
+import { hash, } from "bcrypt"
+import jwt from "jsonwebtoken"
+const { sign } = jwt
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-console.log("Current directory:", __dirname); // Add this to verify __dirname's value
 
 const initializeTestDb = () => {
     const sql = fs.readFileSync(path.resolve(__dirname, "../todo.sql"), "utf8");
@@ -17,8 +18,8 @@ const initializeTestDb = () => {
 
 const insertTestUser = (email, password) => {
     hash(password, 10, (error, hashedPassword) => {
-        pool.query("insert into account (email, password) values ($1, $2)"),
-            [email, hashedPassword]
+        pool.query("insert into account (email, password) values ($1, $2)",
+            [email, hashedPassword])
     })
 }
 

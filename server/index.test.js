@@ -28,7 +28,8 @@ describe("POST task", () => {
         const response = await fetch("http://localhost:3002/create", {
             method: "post",
             headers: {
-                "Content-type":"application/json"
+                "Content-type":"application/json",
+                Authorization: token
             },
             body: JSON.stringify({"description":"Task from unit test"})
         })
@@ -63,7 +64,7 @@ describe("DELETE task", () => {
     it ("should delete a task", async() => {
         const response = await fetch("http://localhost:3002/delete/1", {
             method: "delete",
-            header: {
+            headers: {
                 Authorization: token
             }
         })
@@ -75,7 +76,10 @@ describe("DELETE task", () => {
 
     it("should not delete a task with SQL injection", async () => {
         const response = await fetch("http://localhost:3002/delete/id=0 or id > 0", {
-            method: "delete"
+            method: "delete",
+            headers: {
+                Authorization: token
+            }
         })
         const data = await response.json()
         expect(response.status).to.equal(500)
@@ -96,6 +100,7 @@ describe("POST register", () => {
             body: JSON.stringify({"email":email, "password": password})
         })
         const data = await response.json()
+        console.log(email, password)
         expect(response.status).to.equal(201, data.error)
         expect(data).to.be.an("object")
         expect(data).to.include.all.keys("id", "email")

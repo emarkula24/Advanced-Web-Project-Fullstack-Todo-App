@@ -9,9 +9,9 @@ const router = Router()
 
 router.post("/register", (req, res, next) => {
     hash(req.body.password, 10, (error, hashedPassword) => {
-        if (error) next (error) // Hash error.
+        if (error) next(error) // Hash error.
         try {
-            pool.query("insert into account (email password) values ($1, $2) returning * ",
+            pool.query("insert into account (email, \password\) values ($1,$2) returning *",
                 [req.body.email, hashedPassword],
                 (error, result) => {
                     if (error) return next(error) // Database error.
