@@ -6,7 +6,7 @@ import Row from "../components/Row";
 import { useUser } from "../context/useUser";
 
 
-const url = "http://localhost:3000"
+const url = process.env.REACT_APP_API_URL
 
 function Home() {
   const { user } = useUser()
@@ -48,7 +48,7 @@ function Home() {
   }
 
   return (
-    <div className="App">
+    <div className="Home">
         <h3>Todos</h3>
         <form>
           <input placeholder="Add new task" 

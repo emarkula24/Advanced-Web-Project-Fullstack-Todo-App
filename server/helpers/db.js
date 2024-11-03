@@ -8,6 +8,7 @@ dotenv.config()
 console.log(`Connecting to database: ${process.env.NODE_ENV === "development" ? process.env.POSTGRES_DB_NAME : process.env.TEST_DB_NAME}`);
 console.log(`Database Host: ${process.env.POSTGRES_HOST}`);
 console.log(`Database Port: ${process.env.NODE_ENV === "development" ? process.env.POSTGRES_PORT : process.env.TEST_DB_PORT}`);
+console.log(`Running on port: ${process.env.PORT}`)
 
 const { Pool } = pkg
 
