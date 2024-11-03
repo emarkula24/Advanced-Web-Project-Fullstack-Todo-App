@@ -1,11 +1,12 @@
 
-import "./App.css"
+import "./Home.css"
 import {useState, useEffect} from "react";
 import axios from "axios";
-import Row from "./components/Row";
+import Row from "../components/Row";
 
 const url = "http://localhost:3002"
-function App() {
+
+function Home() {
 
   const [task, setTask] = useState("")
   const [tasks, setTasks] = useState([]);
@@ -68,4 +69,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
