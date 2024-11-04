@@ -1,0 +1,14 @@
+To run this program you should create and .env file to this directory and add the following variables to it:
+
+POSTGRES_USER=your_user
+POSTGRES_PASSWORD=your_password
+POSTGRES_DB_NAME= your_database_name
+POSTGRES_PORT=your_database_port
+POSTGRES_HOST=your_host
+PORT=your_port_where_you_host_the_frontend
+
+TEST_DB_NAME=your_test_db_name
+TEST_DB_PORT=your_test_db_port
+
+
+JWT_SECRET_KEY=your_jwt_secret_key
